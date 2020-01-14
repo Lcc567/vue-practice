@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+    </style>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <div v-click-outside>
+            <input type="text">
+            <div class="box" v-if="isShow"></div>
+        </div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            directives: {
+                clickOutside: {
+                    bind(el, bindings, vnode) {
+                        el.fn = (e) => {
+                            if (el.contains(e.target)) {
+                                vnode.context.focus()
+                            } else {
+                                vnode.context.blur()
+                            }
+                        }
+                        document.addEventListener('click', el.fn)
+                    },
+                    unbind() {
+                        document.removeEventListener('click', el.fn)
+                    }
+                }
+            },
+            data: {
+                isShow: false
+            },
+            methods: {
+                focus() {
+                    this.isShow = true
+                },
+                blur() {
+                    this.isShow = false
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

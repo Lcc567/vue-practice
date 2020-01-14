@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my :n="n"></my>
+    </div>
+    <div id="app1">
+        <my :n="n"></my>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const component = {
+            template: '<div>{{n}}</div>',
+            props: ['n']
+        }
+        // Vue.component('my', {
+        //     template: '<div>{{n}}</div>',
+        //     props: ['n']
+        // })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                n: 1
+            },
+            components: {
+                my: component
+            },
+            beforeCreate() {
+                console.log('创建前', this);
+            },
+            created() {
+                console.log('创建');
+
+            },
+            mounted() {
+                console.log('mount');
+
+            },
+            beforeMount() {
+                console.log('beforeMount');
+
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate');
+
+            },
+            updated() {
+                console.log('update');
+
+            }
+        })
+        let vm1 = new Vue({
+            el: '#app1',
+            data: {
+                n: 2
+            },
+            beforeCreate() {
+                console.log('创建前', this);
+            },
+            created() {
+                console.log('创建');
+
+            },
+            mounted() {
+                console.log('mount');
+
+            },
+            beforeMount() {
+                console.log('beforeMount');
+
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate');
+
+            },
+            updated() {
+                console.log('update');
+
+            }
+        })
+    </script>
+</body>
+
+</html>
